@@ -28,3 +28,4 @@ def test_health_check(client):
     assert rv.status_code == 200
     assert rv.get_json()["status"] == "healthy"
 # Trigger CI/CD - 2026-06-21
+# deploy now
