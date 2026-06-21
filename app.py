@@ -2,6 +2,9 @@
 极简 Flask Web 应用 — CI/CD 实验演示
 """
 from flask import Flask, render_template_string
+import socket
+import platform
+import datetime
 
 app = Flask(__name__)
 
@@ -41,6 +44,8 @@ HTML = """<!DOCTYPE html>
             <p><span>容器 ID：</span>{{ hostname }}</p>
             <p><span>部署时间：</span>{{ deploy_time }}</p>
             <p><span>环境：</span>{{ environment }}</p>
+            <p><span>👤 学号：</span>2440666103</p>
+            <p><span>👤 姓名：</span>陈攀安</p>
         </div>
     </div>
 </body>
@@ -49,13 +54,12 @@ HTML = """<!DOCTYPE html>
 
 @app.route("/")
 def index():
-    import socket, platform, datetime
     return render_template_string(
         HTML,
         python_version=platform.python_version(),
         hostname=socket.gethostname(),
         deploy_time=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-        environment="Production" if app.config.get("ENV") == "production" else "Development",
+        environment="Production" if app.config.get("ENV") == "production" else "Development"
     )
 
 
